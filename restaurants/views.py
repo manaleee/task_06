@@ -18,8 +18,14 @@ def restaurant_detail(request, restaurant_id):
     return render(request, 'detail.html', context)
 
 def restaurant_create(request):
-
+    form = Restaurant()
+    if request.method == "POST":
+        form = ModelNameForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("list-view")
+            
     context = {
-
-    }
+       "form":form
+    } 
     return render(request, 'create.html', context)
